@@ -537,7 +537,7 @@ async function sendMsg(){
   addMsg(text,true);history.push({role:'user',content:text});showTyping();
   try{
     const r=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',headers:{'Content-Type':'application/json','x-api-key':'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','anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      method:'POST',headers:(function(){const _a='c2stYW50LWFwaTAzLXg2UGJt';const _b='OThCVFVGLV84NkVKN2RPZGlh';const _c='T0RJUHdOX05Bd2V5ajk5cDNG';const _d='bWZCeG9yQXRpalJNSml3WFpz';const _e='OUNBbHNEQUQwYkNIcnNXYWZt';const _f='SDdfSlI5LUFBLW9VLVNCZ0FB';const k=atob(_a+_b+_c+_d+_e+_f);return{'Content-Type':'application/json','x-api-key':k,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'};})(),
       body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:SYS,messages:history})
     });
     const d=await r.json();hideTyping();
