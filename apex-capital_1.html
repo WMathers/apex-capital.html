@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apex Capital Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070809;--surface:#0C0D0F;--card:#111315;
+  --border:#1D2024;--border-light:#282C30;
+  --gold:#C8A96E;--gold-light:#DFC08A;--gold-dim:rgba(200,169,110,0.12);
+  --text:#EDE8E0;--text-sec:#888580;--text-muted:#454340;
+  --green:#5B9C7A;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.3;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;background:rgba(7,8,9,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 4rem;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--text);display:flex;align-items:center;gap:.5rem;}
+.nav-logo-line{width:1px;height:20px;background:var(--gold);opacity:.5;}
+.nav-logo span{color:var(--gold);}
+.nav-links{list-style:none;display:flex;gap:2.5rem;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;cursor:pointer;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);}
+
+/* PAGE SYSTEM */
+.page{display:none;padding-top:64px;min-height:100vh;animation:fadeIn .35s ease;}
+.page.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+/* SHARED */
+.eyebrow{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;}
+.eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--gold);}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:300;line-height:1.1;}
+.section-body{font-size:.95rem;font-weight:300;line-height:1.8;color:var(--text-sec);}
+.btn-primary{background:var(--gold);color:#070809;border:none;padding:.8rem 1.8rem;font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:background .2s;}
+.btn-primary:hover{background:var(--gold-light);}
+.btn-secondary{background:transparent;color:var(--text-sec);border:1px solid var(--border-light);padding:.8rem 1.8rem;font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .2s;}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold);}
+footer{border-top:1px solid var(--border);padding:1.75rem 4rem;display:flex;justify-content:space-between;align-items:center;}
+.footer-copy{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.08em;color:var(--text-muted);}
+.footer-initials{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.2em;color:var(--gold);}
+
+/* ═══ HOME ═══ */
+.hero{position:relative;min-height:90vh;display:flex;align-items:center;padding:0 4rem;overflow:hidden;}
+.hero-img{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1600&q=80');background-size:cover;background-position:center;}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(105deg,rgba(7,8,9,.97) 0%,rgba(7,8,9,.88) 55%,rgba(7,8,9,.6) 100%);}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(200,169,110,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(200,169,110,.025) 1px,transparent 1px);background-size:56px 56px;}
+.hero-content{position:relative;z-index:2;max-width:620px;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3.2rem,6vw,5.8rem);font-weight:300;line-height:1.02;margin-bottom:1.5rem;}
+.hero h1 em{font-style:italic;color:var(--gold);}
+.hero-sub{font-size:1rem;font-weight:300;line-height:1.75;color:var(--text-sec);max-width:500px;margin-bottom:2.5rem;}
+.btn-group{display:flex;gap:1rem;}
+
+.stats-strip{border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:grid;grid-template-columns:repeat(3,1fr);}
+.stat-item{padding:2.25rem 4rem;border-right:1px solid var(--border);}
+.stat-item:last-child{border-right:none;}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:var(--gold);line-height:1;margin-bottom:.4rem;}
+.stat-label{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);}
+
+.about-section{padding:6rem 4rem;}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.about-img-wrap{position:relative;}
+.about-img{width:100%;height:400px;object-fit:cover;display:block;filter:grayscale(15%) contrast(1.05);}
+.about-img-border{position:absolute;inset:-10px;border:1px solid var(--gold);opacity:.2;pointer-events:none;}
+.about-img-tag{position:absolute;bottom:0;left:0;background:var(--gold);padding:.4rem .9rem;font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:#070809;}
+
+.img-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.img-strip-item{position:relative;height:210px;overflow:hidden;}
+.img-strip-item img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(35%) contrast(1.1) brightness(.9);transition:filter .5s;}
+.img-strip-item:hover img{filter:grayscale(10%) contrast(1.05) brightness(1);}
+.img-strip-overlay{position:absolute;inset:0;background:rgba(7,8,9,.52);}
+.img-strip-label{position:absolute;bottom:1.25rem;left:1.5rem;font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);}
+
+.cards-section{padding:5rem 4rem;}
+.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
+.feat-card{background:var(--card);padding:2.5rem;}
+.feat-icon{font-size:1.3rem;margin-bottom:1.25rem;}
+.feat-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:400;margin-bottom:.65rem;}
+.feat-body{font-size:.875rem;font-weight:300;line-height:1.75;color:var(--text-sec);}
+
+/* ═══ STRATEGIES ═══ */
+.page-hero{position:relative;padding:5rem 4rem 4rem;overflow:hidden;border-bottom:1px solid var(--border);}
+.page-hero-img{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80');background-size:cover;background-position:center;}
+.page-hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,8,9,.93) 0%,rgba(7,8,9,.9) 100%);}
+.page-hero-content{position:relative;z-index:2;}
+
+.strat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
+.strat-card{background:var(--card);padding:0 0 2.5rem;}
+.strat-card-img{width:100%;height:140px;object-fit:cover;display:block;filter:grayscale(25%) contrast(1.1) brightness(.85);}
+.strat-card-body{padding:2rem 2.5rem 0;}
+.strat-num{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--gold);letter-spacing:.2em;margin-bottom:1rem;}
+.strat-title{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:400;line-height:1.2;margin-bottom:.85rem;}
+.strat-body{font-size:.875rem;font-weight:300;line-height:1.8;color:var(--text-sec);}
+
+.table-section{padding:3.5rem 4rem;}
+.table-section+.table-section{padding-top:0;}
+.data-table{width:100%;border-collapse:collapse;border:1px solid var(--border);}
+.data-table th{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-muted);padding:.9rem 1.4rem;text-align:left;border-bottom:1px solid var(--border);background:var(--surface);}
+.data-table td{padding:1.2rem 1.4rem;border-bottom:1px solid var(--border);font-size:.9rem;font-weight:300;color:var(--text);}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:hover td{background:rgba(200,169,110,.025);}
+.td-name{font-weight:500;}
+.td-green{color:var(--green);font-family:'DM Mono',monospace;font-size:.85rem;}
+.td-num{font-family:'DM Mono',monospace;font-size:.85rem;color:var(--text-sec);}
+.td-sec{font-size:.875rem;color:var(--text-sec);}
+.badge{font-family:'DM Mono',monospace;font-size:.65rem;background:var(--gold-dim);color:var(--gold);padding:.2rem .55rem;border:1px solid rgba(200,169,110,.18);}
+
+.risk-box{margin:0 4rem 3rem;padding:1.75rem 2.25rem;border:1px solid var(--border);border-left:2px solid var(--gold);background:var(--surface);}
+.risk-title{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem;}
+.risk-body{font-size:.8rem;font-weight:300;line-height:1.7;color:var(--text-muted);}
+
+/* ═══ CONTACT ═══ */
+.contact-layout{display:grid;grid-template-columns:1fr 1.35fr;min-height:calc(100vh - 64px);}
+.contact-left{padding:4.5rem 4rem;border-right:1px solid var(--border);}
+.contact-right{padding:4.5rem 4rem;}
+
+.office-img-wrap{margin-bottom:2.25rem;}
+.office-img{width:100%;height:180px;object-fit:cover;display:block;filter:grayscale(20%) contrast(1.05);}
+.office-img-caption{padding:.7rem 1rem;background:var(--card);border:1px solid var(--border);border-top:none;font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted);}
+
+.info-block{margin-bottom:1.75rem;padding-bottom:1.75rem;border-bottom:1px solid var(--border);}
+.info-block:last-of-type{border-bottom:none;}
+.info-label{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.45rem;}
+.info-val{font-size:.95rem;font-weight:300;line-height:1.6;}
+
+.steps-wrap{margin-top:2.5rem;}
+.step{display:flex;gap:1.25rem;margin-bottom:1.75rem;}
+.step-n{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--gold);width:20px;flex-shrink:0;padding-top:.2rem;}
+.step-title{font-family:'Cormorant Garamond',serif;font-size:1.05rem;margin-bottom:.35rem;}
+.step-body{font-size:.875rem;font-weight:300;line-height:1.7;color:var(--text-sec);}
+
+.form-group{margin-bottom:1.35rem;}
+.form-label{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:.45rem;}
+.form-input,.form-select,.form-textarea{width:100%;background:var(--surface);border:1px solid var(--border);color:var(--text);padding:.8rem 1rem;font-family:'Jost',sans-serif;font-size:.9rem;font-weight:300;outline:none;transition:border-color .2s;appearance:none;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--gold);}
+.form-textarea{resize:vertical;min-height:110px;}
+.form-select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23454340'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;cursor:pointer;}
+
+.faq-section{border-top:1px solid var(--border);padding:3.5rem 4rem;}
+.faq-item{border-bottom:1px solid var(--border);}
+.faq-q{font-family:'Cormorant Garamond',serif;font-size:1.1rem;padding:1.35rem 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;color:var(--text);user-select:none;}
+.faq-q:hover{color:var(--gold);}
+.faq-arrow{font-size:.75rem;color:var(--text-muted);transition:transform .2s;}
+.faq-item.open .faq-arrow{transform:rotate(180deg);}
+.faq-a{font-size:.875rem;font-weight:300;line-height:1.75;color:var(--text-sec);padding-bottom:1.35rem;display:none;}
+.faq-item.open .faq-a{display:block;}
+
+/* ═══ CHATBOT ═══ */
+.chat-toggle{position:fixed;bottom:1.75rem;right:1.75rem;z-index:500;width:50px;height:50px;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;box-shadow:0 4px 20px rgba(200,169,110,.28);}
+.chat-toggle:hover{background:var(--gold-light);transform:scale(1.06);}
+.chat-window{position:fixed;bottom:5.25rem;right:1.75rem;z-index:499;width:370px;height:510px;background:var(--surface);border:1px solid var(--border);display:flex;flex-direction:column;transform:scale(.9) translateY(16px);opacity:0;pointer-events:none;transform-origin:bottom right;transition:all .25s cubic-bezier(.34,1.56,.64,1);box-shadow:0 20px 60px rgba(0,0,0,.55);}
+.chat-window.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all;}
+.chat-header{padding:1.1rem 1.4rem;border-bottom:1px solid var(--border);background:var(--card);display:flex;align-items:center;justify-content:space-between;}
+.chat-header-left{display:flex;align-items:center;gap:.75rem;}
+.chat-dot{width:7px;height:7px;background:var(--green);border-radius:50%;animation:blink 2.2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.35;}}
+.chat-name{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.12em;color:var(--text);}
+.chat-sub{font-size:.7rem;color:var(--text-muted);}
+.chat-close-btn{background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:.95rem;line-height:1;}
+.chat-close-btn:hover{color:var(--text);}
+.chat-msgs{flex:1;overflow-y:auto;padding:1.1rem;display:flex;flex-direction:column;gap:.85rem;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+.msg{max-width:86%;padding:.7rem .95rem;font-size:.825rem;font-weight:300;line-height:1.65;}
+.msg-bot{background:var(--card);border:1px solid var(--border);border-left:2px solid var(--gold);color:var(--text);align-self:flex-start;}
+.msg-user{background:var(--gold-dim);border:1px solid rgba(200,169,110,.18);color:var(--text);align-self:flex-end;}
+.typing-wrap{display:flex;gap:4px;align-items:center;padding:.7rem .95rem;background:var(--card);border:1px solid var(--border);border-left:2px solid var(--gold);align-self:flex-start;}
+.tdot{width:5px;height:5px;background:var(--gold);border-radius:50%;animation:tdot 1.2s infinite;}
+.tdot:nth-child(2){animation-delay:.2s;}.tdot:nth-child(3){animation-delay:.4s;}
+@keyframes tdot{0%,100%{opacity:.3;transform:translateY(0);}50%{opacity:1;transform:translateY(-3px);}}
+.chat-input-row{padding:.9rem 1.1rem;border-top:1px solid var(--border);background:var(--card);display:flex;gap:.65rem;align-items:center;}
+.chat-input{flex:1;background:var(--surface);border:1px solid var(--border);color:var(--text);padding:.6rem .8rem;font-family:'Jost',sans-serif;font-size:.825rem;font-weight:300;outline:none;transition:border-color .2s;}
+.chat-input:focus{border-color:var(--gold);}
+.chat-send{background:var(--gold);border:none;width:33px;height:33px;flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s;}
+.chat-send:hover{background:var(--gold-light);}
+.chat-send:disabled{opacity:.4;cursor:not-allowed;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Apex<div class="nav-logo-line"></div><span>Capital Group</span></div>
+  <ul class="nav-links">
+    <li><a id="nav-home" class="active" onclick="showPage('home')">Home</a></li>
+    <li><a id="nav-strategies" onclick="showPage('strategies')">Strategies</a></li>
+    <li><a id="nav-contact" onclick="showPage('contact')">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════════ HOME ═══════════════════ -->
+<div id="page-home" class="page active">
+
+  <div class="hero">
+    <div class="hero-img"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="eyebrow" style="margin-bottom:1.75rem">Quantitative Digital Asset Management</div>
+      <h1>Precision.<br><em>Speed.</em><br>Alpha.</h1>
+      <p class="hero-sub">Apex Capital Group is a quantitative crypto trading firm built for serious investors. We leverage algorithmic strategies and real-time market intelligence to generate consistent, risk-adjusted returns in digital asset markets.</p>
+      <div class="btn-group">
+        <button class="btn-primary" onclick="showPage('strategies')">Explore Our Strategies</button>
+        <button class="btn-secondary" onclick="showPage('contact')">Get Started</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-strip">
+    <div class="stat-item"><div class="stat-num">$48M+</div><div class="stat-label">Assets Under Management</div></div>
+    <div class="stat-item"><div class="stat-num">200ms</div><div class="stat-label">Avg. Execution Speed</div></div>
+    <div class="stat-item"><div class="stat-num">15+</div><div class="stat-label">Markets Traded</div></div>
+  </div>
+
+  <section class="about-section">
+    <div class="about-grid">
+      <div>
+        <div class="eyebrow">About Us</div>
+        <h2 class="section-title" style="margin-bottom:1.25rem">Built by Traders.<br>Driven by Data.</h2>
+        <p class="section-body" style="margin-bottom:1rem">Apex Capital Group was founded by a team of quantitative analysts and professional traders with deep experience in derivatives, futures, and digital asset markets. We combine proprietary algorithms with rigorous risk management to stay ahead of the market — not react to it.</p>
+        <p class="section-body" style="margin-bottom:2rem">Our strategies span funding rate arbitrage, momentum trading, and market-neutral approaches — all automated, all data-driven, operating 24/7 across the world's leading exchanges.</p>
+        <button class="btn-secondary" onclick="showPage('strategies')">View Our Strategies →</button>
+      </div>
+      <div class="about-img-wrap">
+        <img class="about-img" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80" alt="Financial data and analytics">
+        <div class="about-img-border"></div>
+        <div class="about-img-tag">Data-Driven Execution</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="img-strip">
+    <div class="img-strip-item">
+      <img src="https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=700&q=80" alt="Algorithmic trading">
+      <div class="img-strip-overlay"></div>
+      <div class="img-strip-label">Algorithmic Execution</div>
+    </div>
+    <div class="img-strip-item">
+      <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=700&q=80" alt="Digital assets">
+      <div class="img-strip-overlay"></div>
+      <div class="img-strip-label">Digital Asset Markets</div>
+    </div>
+    <div class="img-strip-item">
+      <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=700&q=80" alt="Financial district">
+      <div class="img-strip-overlay"></div>
+      <div class="img-strip-label">Institutional Grade</div>
+    </div>
+  </div>
+
+  <section class="cards-section">
+    <div class="eyebrow" style="margin-bottom:2rem">Why Apex</div>
+    <div class="cards-grid">
+      <div class="feat-card">
+        <div class="feat-icon">⚖</div>
+        <div class="feat-title">Risk-First Approach</div>
+        <div class="feat-body">Every strategy is stress-tested and size-managed. We don't chase returns — we engineer them with disciplined position sizing and drawdown controls built into every system.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">⚙</div>
+        <div class="feat-title">Fully Automated</div>
+        <div class="feat-body">Our systems run 24/7 across Binance, OKX, and Bybit, removing emotional bias from every trade decision and executing with millisecond-level precision.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">◈</div>
+        <div class="feat-title">Transparent Reporting</div>
+        <div class="feat-body">Clients receive detailed monthly performance reports with full strategy breakdowns, drawdown metrics, and real-time read-only account access from day one.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-copy">© 2025 Apex Capital Group · Baltimore, MD · contact@apexcapitalgroup.io · (410) 555-0192</div>
+    <div class="footer-initials">W.T.M.</div>
+  </footer>
+</div>
+
+<!-- ═══════════════════ STRATEGIES ═══════════════════ -->
+<div id="page-strategies" class="page">
+
+  <div class="page-hero">
+    <div class="page-hero-img"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <div class="eyebrow">Strategies &amp; Services</div>
+      <h1 class="section-title" style="margin-bottom:.85rem">How We Generate Alpha</h1>
+      <p class="section-body" style="max-width:580px">We deploy a suite of systematic trading strategies across crypto derivatives markets — designed for performance in both bull and bear conditions.</p>
+    </div>
+  </div>
+
+  <div class="strat-grid">
+    <div class="strat-card">
+      <img class="strat-card-img" src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=600&q=80" alt="Crypto trading screens">
+      <div class="strat-card-body">
+        <div class="strat-num">01 — Arbitrage</div>
+        <div class="strat-title">Funding Rate Arbitrage</div>
+        <div class="strat-body">We exploit persistent pricing inefficiencies between perpetual futures and spot markets. By holding delta-neutral positions, we capture funding payments regardless of market direction — a consistent, low-correlation return stream.</div>
+      </div>
+    </div>
+    <div class="strat-card">
+      <img class="strat-card-img" src="https://images.unsplash.com/photo-1504607798333-52a30db54a5d?auto=format&fit=crop&w=600&q=80" alt="Trading monitors">
+      <div class="strat-card-body">
+        <div class="strat-num">02 — Momentum</div>
+        <div class="strat-title">Momentum & Trend Following</div>
+        <div class="strat-body">Our momentum models identify breakout conditions across multiple timeframes and asset pairs. Positions are sized dynamically based on volatility and signal confidence, capturing sustained directional moves with managed downside.</div>
+      </div>
+    </div>
+    <div class="strat-card">
+      <img class="strat-card-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="Data analysis dashboard">
+      <div class="strat-card-body">
+        <div class="strat-num">03 — Statistical</div>
+        <div class="strat-title">Statistical Arbitrage</div>
+        <div class="strat-body">We monitor correlated asset pairs for mean-reversion opportunities, executing when spreads deviate beyond historical norms. This strategy is largely market-neutral and produces returns independent of broad market direction.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-section">
+    <div class="eyebrow">What We Offer</div>
+    <h2 class="section-title" style="margin-bottom:1.75rem">Client Services</h2>
+    <table class="data-table">
+      <thead><tr><th>Service</th><th>Description</th><th>Minimum</th></tr></thead>
+      <tbody>
+        <tr><td class="td-name">Managed Accounts</td><td class="td-sec">We trade on your behalf using our core strategies. Full transparency, monthly reporting, and read-only dashboard access.</td><td><span class="badge">$25,000</span></td></tr>
+        <tr><td class="td-name">Copy Trading</td><td class="td-sec">Mirror our live trades automatically on your own exchange account with no asset custody required.</td><td><span class="badge">$5,000</span></td></tr>
+        <tr><td class="td-name">Strategy Consulting</td><td class="td-sec">One-on-one sessions with our quant team to build, audit, or optimize your own algorithmic trading systems.</td><td><span class="badge">Contact Us</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-section">
+    <div class="eyebrow">Track Record</div>
+    <h2 class="section-title" style="margin-bottom:.4rem">Simulated Performance</h2>
+    <p style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.12em;color:var(--text-muted);margin-bottom:1.75rem;text-transform:uppercase">Hypothetical · Backtested Data · Not a Guarantee of Future Results</p>
+    <table class="data-table">
+      <thead><tr><th>Strategy</th><th>12-Month Return</th><th>Max Drawdown</th><th>Sharpe Ratio</th></tr></thead>
+      <tbody>
+        <tr><td class="td-name">Funding Rate Arb</td><td class="td-green">+31.4%</td><td class="td-num">−4.2%</td><td class="td-num">2.87</td></tr>
+        <tr><td class="td-name">Momentum</td><td class="td-green">+58.7%</td><td class="td-num">−12.1%</td><td class="td-num">1.94</td></tr>
+        <tr><td class="td-name">Statistical Arb</td><td class="td-green">+22.9%</td><td class="td-num">−3.8%</td><td class="td-num">3.10</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="risk-box">
+    <div class="risk-title">Risk Disclosure</div>
+    <div class="risk-body">Cryptocurrency trading involves a high degree of risk and may not be suitable for all investors. The value of digital assets can fluctuate significantly and you may lose some or all of your investment. Apex Capital Group does not provide financial advice. All investment decisions are made at the client's discretion. Results shown are hypothetical and based on backtested simulation data only.</div>
+  </div>
+
+  <footer>
+    <div class="footer-copy">© 2025 Apex Capital Group · Baltimore, MD · contact@apexcapitalgroup.io · (410) 555-0192</div>
+    <div class="footer-initials">W.T.M.</div>
+  </footer>
+</div>
+
+<!-- ═══════════════════ CONTACT ═══════════════════ -->
+<div id="page-contact" class="page">
+
+  <div class="contact-layout">
+    <div class="contact-left">
+      <div class="office-img-wrap">
+        <img class="office-img" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" alt="Baltimore financial district">
+        <div class="office-img-caption">100 Light Street · Baltimore, MD 21202</div>
+      </div>
+
+      <div class="eyebrow">Contact &amp; Onboarding</div>
+      <h1 class="section-title" style="margin-bottom:1rem">Let's Talk.</h1>
+      <p class="section-body" style="margin-bottom:2.25rem">Whether you're ready to invest or just have questions, our team is here to help. We'll respond within one business day.</p>
+
+      <div class="info-block"><div class="info-label">Address</div><div class="info-val">100 Light Street, Suite 400<br>Baltimore, MD 21202</div></div>
+      <div class="info-block"><div class="info-label">Email</div><div class="info-val">contact@apexcapitalgroup.io</div></div>
+      <div class="info-block"><div class="info-label">Phone</div><div class="info-val">(410) 555-0192</div></div>
+      <div class="info-block"><div class="info-label">Hours</div><div class="info-val">Monday – Friday · 9:00 AM – 6:00 PM EST</div></div>
+
+      <div class="steps-wrap">
+        <div class="eyebrow" style="margin-top:.25rem">Onboarding Process</div>
+        <div class="step" style="margin-top:1.25rem">
+          <div class="step-n">01</div>
+          <div><div class="step-title">Schedule a Call</div><div class="step-body">Submit the form or email us directly. We'll arrange a free 30-minute discovery call to understand your goals and risk tolerance.</div></div>
+        </div>
+        <div class="step">
+          <div class="step-n">02</div>
+          <div><div class="step-title">Review &amp; Sign</div><div class="step-body">We'll send a client agreement, strategy overview, and fee structure. No hidden fees — ever.</div></div>
+        </div>
+        <div class="step">
+          <div class="step-n">03</div>
+          <div><div class="step-title">Go Live</div><div class="step-body">Your account goes live within 48 hours. Dashboard access and monthly performance reports from day one.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-right">
+      <div class="eyebrow">Inquiry Form</div>
+      <h2 class="section-title" style="font-size:2rem;margin-bottom:2rem">Start the Conversation</h2>
+      <div class="form-group"><label class="form-label">Full Name</label><input type="text" class="form-input" placeholder="John Smith"></div>
+      <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" placeholder="john@example.com"></div>
+      <div class="form-group"><label class="form-label">Phone Number (optional)</label><input type="tel" class="form-input" placeholder="(555) 000-0000"></div>
+      <div class="form-group">
+        <label class="form-label">I'm Interested In</label>
+        <select class="form-select">
+          <option value="">Select a service...</option>
+          <option>Managed Accounts</option>
+          <option>Copy Trading</option>
+          <option>Strategy Consulting</option>
+          <option>General Inquiry</option>
+        </select>
+      </div>
+      <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Tell us about your investment goals and timeline..."></textarea></div>
+      <button class="btn-primary" style="width:100%;padding:1rem">Send Message</button>
+    </div>
+  </div>
+
+  <div class="faq-section">
+    <div class="eyebrow">FAQ</div>
+    <h2 class="section-title" style="margin-bottom:1.75rem">Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">What exchanges do you trade on? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">We primarily operate on Binance, OKX, and Bybit — all Tier 1 exchanges with deep liquidity and institutional-grade APIs.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">How are fees structured? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">We charge a 1.5% annual management fee plus a 15% performance fee on profits above the high-water mark. No hidden fees, ever.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Is my capital locked up? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Managed account clients have a 90-day initial lock-up period. After that, withdrawals can be requested with 14 days notice. Copy trading clients maintain full custody of their own accounts.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Can I monitor my positions in real time? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Yes. Managed account clients receive read-only API access and a live client dashboard to monitor positions, PnL, and drawdown at any time.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">What is the minimum investment? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">$25,000 for managed accounts and $5,000 for copy trading. Strategy consulting is available regardless of account size — reach out for custom pricing.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Do you provide tax documents? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">We provide detailed trade logs and monthly performance summaries that can be shared with your accountant or tax professional. We recommend consulting a CPA familiar with digital asset taxation.</div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-copy">© 2025 Apex Capital Group · Baltimore, MD · contact@apexcapitalgroup.io · (410) 555-0192</div>
+    <div class="footer-initials">W.T.M.</div>
+  </footer>
+</div>
+
+<!-- CHATBOT -->
+<button class="chat-toggle" onclick="toggleChat()" title="Chat with Apex AI">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#070809" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+  </svg>
+</button>
+
+<div class="chat-window" id="chatWindow">
+  <div class="chat-header">
+    <div class="chat-header-left">
+      <div class="chat-dot"></div>
+      <div><div class="chat-name">APEX AI ASSISTANT</div><div class="chat-sub">Powered by Claude · Online</div></div>
+    </div>
+    <button class="chat-close-btn" onclick="toggleChat()">✕</button>
+  </div>
+  <div class="chat-msgs" id="chatMsgs">
+    <div class="msg msg-bot">Welcome to Apex Capital Group. I can answer questions about our trading strategies, services, fees, minimums, and onboarding process. How can I help?</div>
+  </div>
+  <div class="chat-input-row">
+    <input type="text" class="chat-input" id="chatInput" placeholder="Ask a question..." onkeydown="if(event.key==='Enter')sendMsg()">
+    <button class="chat-send" id="sendBtn" onclick="sendMsg()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#070809" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+function showPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  document.getElementById('nav-'+name).classList.add('active');
+  window.scrollTo(0,0);
+}
+function toggleFaq(el){el.parentElement.classList.toggle('open');}
+
+let chatOpen=false,history=[];
+const SYS=`You are the AI assistant for Apex Capital Group, a quantitative cryptocurrency trading and investment firm based in Baltimore, MD.
+
+Key facts:
+- AUM: $48M+ | Avg execution: 200ms | Markets: 15+
+- Exchanges: Binance, OKX, Bybit
+
+Services:
+1. Managed Accounts — min $25,000. We trade on behalf of clients, full transparency, monthly reports, read-only dashboard.
+2. Copy Trading — min $5,000. Client mirrors live trades on their own account.
+3. Strategy Consulting — contact for pricing.
+
+Fees: 1.5% annual management fee + 15% performance fee above high-water mark. No hidden fees.
+
+Strategies:
+- Funding Rate Arbitrage: delta-neutral, captures funding between spot and perp futures. Backtested: +31.4%, -4.2% drawdown, Sharpe 2.87
+- Momentum/Trend Following: breakout-based, dynamically sized. Backtested: +58.7%, -12.1% drawdown, Sharpe 1.94
+- Statistical Arbitrage: mean-reversion on correlated pairs. Backtested: +22.9%, -3.8% drawdown, Sharpe 3.10
+
+Lock-up: 90-day initial for managed accounts; withdrawals with 14 days notice after.
+Onboarding: (1) Discovery call (2) Sign agreement (3) Go live within 48hrs.
+Contact: 100 Light Street Suite 400, Baltimore MD 21202 | contact@apexcapitalgroup.io | (410) 555-0192 | Mon-Fri 9AM-6PM EST
+
+Be concise and professional. Note that past performance does not guarantee future results when discussing returns. Do not give specific financial advice.`;
+
+function toggleChat(){
+  chatOpen=!chatOpen;
+  document.getElementById('chatWindow').classList.toggle('open',chatOpen);
+  if(chatOpen)document.getElementById('chatInput').focus();
+}
+function addMsg(text,isUser){
+  const c=document.getElementById('chatMsgs'),d=document.createElement('div');
+  d.className='msg '+(isUser?'msg-user':'msg-bot');d.textContent=text;
+  c.appendChild(d);c.scrollTop=c.scrollHeight;
+}
+function showTyping(){
+  const c=document.getElementById('chatMsgs'),d=document.createElement('div');
+  d.className='typing-wrap';d.id='typing';
+  d.innerHTML='<div class="tdot"></div><div class="tdot"></div><div class="tdot"></div>';
+  c.appendChild(d);c.scrollTop=c.scrollHeight;
+}
+function hideTyping(){const t=document.getElementById('typing');if(t)t.remove();}
+
+async function sendMsg(){
+  const inp=document.getElementById('chatInput'),text=inp.value.trim();
+  if(!text)return;
+  inp.value='';inp.disabled=true;document.getElementById('sendBtn').disabled=true;
+  addMsg(text,true);history.push({role:'user',content:text});showTyping();
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:SYS,messages:history})
+    });
+    const d=await r.json();hideTyping();
+    const reply=d.content?.[0]?.text||'Sorry, something went wrong. Please try again or email us directly.';
+    history.push({role:'assistant',content:reply});addMsg(reply,false);
+  }catch(e){
+    hideTyping();
+    addMsg('Connection issue. Please reach us at contact@apexcapitalgroup.io or (410) 555-0192.',false);
+  }
+  inp.disabled=false;document.getElementById('sendBtn').disabled=false;inp.focus();
+}
+</script>
+</body>
+</html>
